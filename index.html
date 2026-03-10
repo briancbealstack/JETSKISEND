@@ -20,9 +20,7 @@
     --glass: rgba(255,255,255,0.06);
     --glass-border: rgba(255,255,255,0.1);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'Outfit', sans-serif;
     background: var(--ocean-deep);
@@ -30,8 +28,6 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-
-  /* Animated ocean gradient background */
   body::before {
     content: '';
     position: fixed;
@@ -43,976 +39,334 @@
       radial-gradient(ellipse at 50% 50%, rgba(10,22,40,1) 0%, rgba(10,22,40,1) 100%);
     z-index: -2;
   }
-
-  /* Wave animation at top */
   .wave-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 200%; height: 100%;
-    z-index: -1;
-    opacity: 0.03;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 40px,
-      rgba(168,216,234,0.3) 40px,
-      rgba(168,216,234,0.3) 42px
-    );
+    position: fixed; top: 0; left: 0; width: 200%; height: 100%; z-index: -1; opacity: 0.03;
+    background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(168,216,234,0.3) 40px, rgba(168,216,234,0.3) 42px);
     animation: waveSlide 20s linear infinite;
   }
-
-  @keyframes waveSlide {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  /* Header */
-  header {
-    text-align: center;
-    padding: 40px 0 30px;
-    position: relative;
-  }
-
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 120px; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--sun-gold), transparent);
-  }
-
-  .logo-mark {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--spray);
-    opacity: 0.7;
-    margin-bottom: 8px;
-  }
-
-  h1 {
-    font-weight: 900;
-    font-size: clamp(28px, 5vw, 48px);
-    line-height: 1.1;
-    background: linear-gradient(135deg, var(--foam) 0%, var(--spray) 40%, var(--sun-gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 6px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 15px;
-    color: var(--spray);
-    opacity: 0.6;
-  }
-
-  /* Score Display */
-  .score-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 30px 0;
-    flex-wrap: wrap;
-  }
-
-  .main-score {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .score-ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  .score-ring svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
-
-  .score-ring-bg {
-    fill: none;
-    stroke: rgba(255,255,255,0.05);
-    stroke-width: 6;
-  }
-
-  .score-ring-fill {
-    fill: none;
-    stroke-width: 6;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 1.5s ease, stroke 0.5s ease;
-  }
-
-  .score-number {
-    font-family: 'Space Mono', monospace;
-    font-size: 52px;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .score-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.5;
-    margin-top: 4px;
-  }
-
-  .verdict-badge {
-    padding: 10px 28px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 2px solid;
-    animation: pulseGlow 2s ease-in-out infinite;
-  }
-
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.05); }
-    50% { box-shadow: 0 0 25px rgba(255,255,255,0.1); }
-  }
-
-  /* Input Grid */
-  .input-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    margin: 30px 0;
-  }
-
-  .input-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .input-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .input-card:hover::before { opacity: 1; }
-  .input-card:hover { border-color: rgba(255,255,255,0.15); }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .card-icon {
-    font-size: 22px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-  }
-
-  .card-title {
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
-
-  .card-subtitle {
-    font-size: 11px;
-    opacity: 0.4;
-    font-weight: 300;
-  }
-
-  .slider-container {
-    margin-top: 10px;
-  }
-
-  .slider-value {
-    font-family: 'Space Mono', monospace;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .slider-value .unit {
-    font-size: 14px;
-    font-weight: 400;
-    opacity: 0.5;
-  }
-
-  input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 3px;
-    outline: none;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 22px;
-    height: 22px;
-    background: var(--sun-gold);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(245,183,49,0.4);
-    transition: box-shadow 0.2s;
-  }
-
-  input[type="range"]::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 20px rgba(245,183,49,0.6);
-  }
-
-  input[type="range"]::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
-    background: var(--sun-gold);
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
-  }
-
-  /* Select inputs */
-  select {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--foam);
-    padding: 12px 14px;
-    border-radius: 10px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23a8d8ea'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    margin-top: 6px;
-  }
-
-  select option {
-    background: var(--ocean-deep);
-    color: var(--foam);
-  }
-
-  /* Breakdown bars */
-  .breakdown-section {
-    margin: 30px 0;
-  }
-
-  .breakdown-title {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-
-  .breakdown-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .factor-bar {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .factor-bar-fill {
-    position: absolute;
-    top: 0; left: 0;
-    height: 100%;
-    border-radius: 12px;
-    opacity: 0.08;
-    transition: width 0.8s ease;
-  }
-
-  .factor-name {
-    font-size: 12px;
-    opacity: 0.5;
-    position: relative;
-    z-index: 1;
-  }
-
-  .factor-score {
-    font-family: 'Space Mono', monospace;
-    font-size: 22px;
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
-  }
-
-  .factor-note {
-    font-size: 11px;
-    opacity: 0.35;
-    position: relative;
-    z-index: 1;
-    margin-top: 2px;
-  }
-
-  /* Webcam Section */
-  .webcam-section {
-    margin: 40px 0;
-  }
-
-  .webcam-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .webcam-header h2 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .live-dot {
-    width: 8px; height: 8px;
-    background: #e74c3c;
-    border-radius: 50%;
-    animation: livePulse 1.5s ease-in-out infinite;
-  }
-
-  @keyframes livePulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231,76,60,0.6); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(231,76,60,0); }
-  }
-
-  .webcam-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 16px;
-  }
-
-  .webcam-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .webcam-card iframe {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    display: block;
-  }
-
-  .webcam-label {
-    padding: 12px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .webcam-label .live-dot {
-    width: 6px; height: 6px;
-  }
-
-  /* Tips */
-  .tips-section {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 24px;
-    margin: 30px 0;
-  }
-
-  .tips-title {
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .tip-list {
-    list-style: none;
-    display: grid;
-    gap: 8px;
-  }
-
-  .tip-list li {
-    font-size: 14px;
-    font-weight: 300;
-    padding-left: 20px;
-    position: relative;
-    opacity: 0.7;
-    line-height: 1.5;
-  }
-
-  .tip-list li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--sun-gold);
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 40px 0 30px;
-    opacity: 0.3;
-    font-size: 12px;
-    font-weight: 300;
-  }
-
-  /* Toggle */
-  .toggle-row {
-    display: flex;
-    gap: 6px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
-
-  .toggle-btn {
-    flex: 1;
-    min-width: 0;
-    padding: 10px 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
-    color: var(--foam);
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .toggle-btn.active {
-    background: rgba(245,183,49,0.15);
-    border-color: var(--sun-gold);
-    color: var(--sun-gold);
-    font-weight: 600;
-  }
-
-  .toggle-btn:hover:not(.active) {
-    background: rgba(255,255,255,0.06);
-  }
-
-  /* Responsive */
+  @keyframes waveSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  header { text-align: center; padding: 40px 0 30px; position: relative; }
+  header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 3px; background: linear-gradient(90deg, transparent, var(--sun-gold), transparent); }
+  .logo-mark { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--spray); opacity: 0.7; margin-bottom: 8px; }
+  h1 { font-weight: 900; font-size: clamp(28px, 5vw, 48px); line-height: 1.1; background: linear-gradient(135deg, var(--foam) 0%, var(--spray) 40%, var(--sun-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
+  .subtitle { font-weight: 300; font-size: 15px; color: var(--spray); opacity: 0.6; }
+  .status-bar { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .status-pill { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); font-size: 12px; opacity: 0.6; }
+  .status-pill.live { border-color: var(--go-green); opacity: 1; }
+  .status-pill.loading { border-color: var(--sun-gold); opacity: 1; }
+  .status-pill.error { border-color: var(--danger-red); opacity: 1; }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--go-green); animation: lp 1.5s ease-in-out infinite; }
+  .pulse.yellow { background: var(--sun-gold); }
+  .pulse.red { background: var(--danger-red); }
+  @keyframes lp { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(46,204,113,0.6); } 50% { opacity:0.7; box-shadow:0 0 0 6px rgba(46,204,113,0); } }
+  .refresh-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--foam); padding: 8px 18px; border-radius: 20px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .refresh-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--sun-gold); }
+  .refresh-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .score-section { display: flex; justify-content: center; align-items: center; gap: 30px; margin: 30px 0; flex-wrap: wrap; }
+  .main-score { position: relative; width: 180px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-ring { position: absolute; width: 100%; height: 100%; }
+  .score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .score-ring-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 6; }
+  .score-ring-fill { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1.5s ease, stroke 0.5s ease; }
+  .score-number { font-family: 'Space Mono', monospace; font-size: 52px; font-weight: 700; line-height: 1; }
+  .score-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; margin-top: 4px; }
+  .verdict-badge { padding: 10px 28px; border-radius: 40px; font-weight: 700; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; border: 2px solid; animation: pg 2s ease-in-out infinite; }
+  @keyframes pg { 0%,100% { box-shadow: 0 0 15px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 25px rgba(255,255,255,0.1); } }
+  .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 30px 0; }
+  .data-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; padding: 18px; backdrop-filter: blur(10px); transition: all 0.3s; }
+  .data-card:hover { border-color: rgba(255,255,255,0.15); }
+  .dc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .dc-icon { font-size: 20px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border-radius: 10px; }
+  .dc-title { font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
+  .dc-sub { font-size: 10px; opacity: 0.35; font-weight: 300; }
+  .dc-value { font-family: 'Space Mono', monospace; font-size: 30px; font-weight: 700; line-height: 1; margin: 6px 0; }
+  .dc-value .unit { font-size: 14px; font-weight: 400; opacity: 0.5; }
+  .dc-detail { font-size: 11px; opacity: 0.4; }
+  .dc-score-bar { margin-top: 10px; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .dc-score-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+  .breakdown-section { margin: 30px 0; }
+  .breakdown-title { font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; text-align: center; }
+  .breakdown-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .factor-bar { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 16px; position: relative; overflow: hidden; }
+  .factor-bar-fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 12px; opacity: 0.08; transition: width 0.8s ease; }
+  .factor-name { font-size: 12px; opacity: 0.5; position: relative; z-index: 1; }
+  .factor-score { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; position: relative; z-index: 1; }
+  .factor-note { font-size: 11px; opacity: 0.35; position: relative; z-index: 1; margin-top: 2px; }
+  .tips-section { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; margin: 30px 0; }
+  .tips-title { font-weight: 600; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .tip-list { list-style: none; display: grid; gap: 8px; }
+  .tip-list li { font-size: 14px; font-weight: 300; padding-left: 20px; position: relative; opacity: 0.7; line-height: 1.5; }
+  .tip-list li::before { content: '▸'; position: absolute; left: 0; color: var(--sun-gold); }
+  .webcam-section { margin: 40px 0; }
+  .webcam-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .webcam-header h2 { font-size: 18px; font-weight: 600; }
+  .live-dot { width: 8px; height: 8px; background: #e74c3c; border-radius: 50%; animation: lp 1.5s ease-in-out infinite; }
+  .webcam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+  .webcam-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; }
+  .webcam-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+  .webcam-label { padding: 12px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .webcam-label .live-dot { width: 6px; height: 6px; }
+  .webcam-placeholder { width: 100%; aspect-ratio: 16/9; background: rgba(255,255,255,0.02); border: 2px dashed rgba(255,255,255,0.08); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,0.25); font-size: 14px; }
+  .webcam-placeholder .ph-icon { font-size: 36px; opacity: 0.4; }
+  .cam-link { display: inline-flex; align-items: center; gap: 4px; padding: 8px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; color: var(--spray); text-decoration: none; font-size: 12px; transition: all 0.2s; }
+  .cam-link:hover { background: rgba(255,255,255,0.08); border-color: var(--sun-gold); color: var(--sun-gold); }
+  footer { text-align: center; padding: 40px 0 30px; opacity: 0.3; font-size: 12px; font-weight: 300; }
   @media (max-width: 600px) {
     .container { padding: 12px; }
     header { padding: 24px 0 20px; }
-    .input-grid { grid-template-columns: 1fr; }
+    .data-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .webcam-grid { grid-template-columns: 1fr; }
     .breakdown-grid { grid-template-columns: 1fr 1fr; }
-    .score-section { gap: 16px; }
     .main-score { width: 140px; height: 140px; }
     .score-number { font-size: 40px; }
+    .dc-value { font-size: 24px; }
   }
 </style>
 </head>
 <body>
 <div class="wave-bg"></div>
 <div class="container">
-
   <header>
     <div class="logo-mark">⚓ St. Johns River</div>
     <h1>Jet Ski Conditions</h1>
-    <div class="subtitle">St. Augustine / Intracoastal Waterway, FL</div>
+    <div class="subtitle">St. Augustine / Intracoastal Waterway, FL — Live Data</div>
   </header>
-
-  <!-- MAIN SCORE -->
+  <div class="status-bar">
+    <div class="status-pill loading" id="statusPill"><div class="pulse yellow" id="statusDot"></div><span id="statusText">Loading live data...</span></div>
+    <span id="lastUpdate" style="font-size:11px;opacity:0.35;"></span>
+    <button class="refresh-btn" id="refreshBtn" onclick="fetchAllData()">↻ Refresh</button>
+  </div>
   <div class="score-section">
     <div class="main-score">
-      <div class="score-ring">
-        <svg viewBox="0 0 180 180">
-          <circle class="score-ring-bg" cx="90" cy="90" r="80"/>
-          <circle class="score-ring-fill" id="scoreRing" cx="90" cy="90" r="80"
-            stroke-dasharray="502" stroke-dashoffset="502"/>
-        </svg>
-      </div>
+      <div class="score-ring"><svg viewBox="0 0 180 180"><circle class="score-ring-bg" cx="90" cy="90" r="80"/><circle class="score-ring-fill" id="scoreRing" cx="90" cy="90" r="80" stroke-dasharray="502" stroke-dashoffset="502"/></svg></div>
       <div class="score-number" id="scoreNumber">--</div>
       <div class="score-label">out of 100</div>
     </div>
-    <div class="verdict-badge" id="verdictBadge">Set Conditions</div>
+    <div class="verdict-badge" id="verdictBadge">Loading...</div>
   </div>
-
-  <!-- INPUTS -->
-  <div class="input-grid">
-
-    <div class="input-card" style="--accent: #4fc3f7;">
-      <div class="card-header">
-        <div class="card-icon">🌡️</div>
-        <div>
-          <div class="card-title">Water Temperature</div>
-          <div class="card-subtitle">St. Johns River surface temp</div>
-        </div>
-      </div>
-      <div class="slider-container">
-        <div class="slider-value"><span id="waterTempVal">75</span><span class="unit"> °F</span></div>
-        <input type="range" id="waterTemp" min="45" max="95" value="75" oninput="update()">
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🌬️</div>
-        <div>
-          <div class="card-title">Wind Speed</div>
-          <div class="card-subtitle">Sustained wind at water level</div>
-        </div>
-      </div>
-      <div class="slider-container">
-        <div class="slider-value"><span id="windVal">8</span><span class="unit"> mph</span></div>
-        <input type="range" id="windSpeed" min="0" max="40" value="8" oninput="update()">
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🌊</div>
-        <div>
-          <div class="card-title">Wave Height</div>
-          <div class="card-subtitle">Chop on the river / ICW</div>
-        </div>
-      </div>
-      <div class="slider-container">
-        <div class="slider-value"><span id="waveVal">1.0</span><span class="unit"> ft</span></div>
-        <input type="range" id="waveHeight" min="0" max="50" value="10" oninput="update()">
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🌤️</div>
-        <div>
-          <div class="card-title">Air Temperature</div>
-          <div class="card-subtitle">Feels-like temperature</div>
-        </div>
-      </div>
-      <div class="slider-container">
-        <div class="slider-value"><span id="airTempVal">82</span><span class="unit"> °F</span></div>
-        <input type="range" id="airTemp" min="35" max="110" value="82" oninput="update()">
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🔆</div>
-        <div>
-          <div class="card-title">Visibility</div>
-          <div class="card-subtitle">Water clarity & fog</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn active" data-group="visibility" data-val="clear" onclick="toggleSelect(this)">Clear</button>
-        <button class="toggle-btn" data-group="visibility" data-val="hazy" onclick="toggleSelect(this)">Hazy</button>
-        <button class="toggle-btn" data-group="visibility" data-val="foggy" onclick="toggleSelect(this)">Foggy</button>
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🌧️</div>
-        <div>
-          <div class="card-title">Precipitation</div>
-          <div class="card-subtitle">Current / forecast rain</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn active" data-group="precip" data-val="none" onclick="toggleSelect(this)">None</button>
-        <button class="toggle-btn" data-group="precip" data-val="light" onclick="toggleSelect(this)">Light</button>
-        <button class="toggle-btn" data-group="precip" data-val="heavy" onclick="toggleSelect(this)">Heavy</button>
-        <button class="toggle-btn" data-group="precip" data-val="storm" onclick="toggleSelect(this)">⚡ Storm</button>
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🌊</div>
-        <div>
-          <div class="card-title">Tide Phase</div>
-          <div class="card-subtitle">St. Augustine Inlet tides</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn" data-group="tide" data-val="low" onclick="toggleSelect(this)">Low</button>
-        <button class="toggle-btn" data-group="tide" data-val="incoming" onclick="toggleSelect(this)">Incoming</button>
-        <button class="toggle-btn active" data-group="tide" data-val="high" onclick="toggleSelect(this)">High</button>
-        <button class="toggle-btn" data-group="tide" data-val="outgoing" onclick="toggleSelect(this)">Outgoing</button>
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">⏰</div>
-        <div>
-          <div class="card-title">Time of Day</div>
-          <div class="card-subtitle">Daylight & traffic patterns</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn" data-group="timeofday" data-val="earlyam" onclick="toggleSelect(this)">Dawn</button>
-        <button class="toggle-btn active" data-group="timeofday" data-val="morning" onclick="toggleSelect(this)">Morning</button>
-        <button class="toggle-btn" data-group="timeofday" data-val="midday" onclick="toggleSelect(this)">Midday</button>
-        <button class="toggle-btn" data-group="timeofday" data-val="evening" onclick="toggleSelect(this)">Evening</button>
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">🚤</div>
-        <div>
-          <div class="card-title">River Traffic</div>
-          <div class="card-subtitle">Expected boat congestion</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn active" data-group="traffic" data-val="light" onclick="toggleSelect(this)">Light</button>
-        <button class="toggle-btn" data-group="traffic" data-val="moderate" onclick="toggleSelect(this)">Moderate</button>
-        <button class="toggle-btn" data-group="traffic" data-val="heavy" onclick="toggleSelect(this)">Heavy</button>
-      </div>
-    </div>
-
-    <div class="input-card">
-      <div class="card-header">
-        <div class="card-icon">⚡</div>
-        <div>
-          <div class="card-title">Current Strength</div>
-          <div class="card-subtitle">Tidal / river current</div>
-        </div>
-      </div>
-      <div class="toggle-row">
-        <button class="toggle-btn" data-group="current" data-val="calm" onclick="toggleSelect(this)">Calm</button>
-        <button class="toggle-btn active" data-group="current" data-val="mild" onclick="toggleSelect(this)">Mild</button>
-        <button class="toggle-btn" data-group="current" data-val="strong" onclick="toggleSelect(this)">Strong</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- BREAKDOWN -->
+  <div class="data-grid" id="dataGrid"></div>
   <div class="breakdown-section">
     <div class="breakdown-title">Factor Breakdown</div>
     <div class="breakdown-grid" id="breakdownGrid"></div>
   </div>
-
-  <!-- TIPS -->
-  <div class="tips-section" id="tipsSection">
-    <div class="tips-title">💡 Recommendations</div>
-    <ul class="tip-list" id="tipList"></ul>
-  </div>
-
-  <!-- WEBCAM -->
+  <div class="tips-section"><div class="tips-title">💡 Recommendations</div><ul class="tip-list" id="tipList"></ul></div>
   <div class="webcam-section">
-    <div class="webcam-header">
-      <div class="live-dot"></div>
-      <h2>Live River Views — St. Augustine</h2>
-    </div>
-    <div class="webcam-grid">
-      <div class="webcam-card">
-        <iframe src="https://www.skylinewebcams.com/en/webcam/united-states/florida/st-augustine/matanzas-river.html" 
-          loading="lazy" allowfullscreen allow="autoplay"></iframe>
-        <div class="webcam-label">
-          <div class="live-dot"></div>
-          Matanzas River & Lighthouse — 24/7 Live
+    <div class="webcam-header"><div class="live-dot"></div><h2>Live River Views — St. Augustine</h2></div>
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:13px;opacity:0.5;">🔧</span>
+        <span style="font-size:12px;opacity:0.5;letter-spacing:1px;text-transform:uppercase;">YouTube Stream IDs</span>
+        <span style="font-size:11px;opacity:0.3;">(paste from YouTube URL after ?v=)</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <label style="font-size:11px;opacity:0.4;display:block;margin-bottom:4px;">Cam 1 — Bridge of Lions / Matanzas</label>
+          <div style="display:flex;gap:6px;">
+            <input type="text" id="ytId1" placeholder="YouTube Video ID" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--foam);padding:8px 10px;border-radius:8px;font-family:'Space Mono',monospace;font-size:12px;outline:none;">
+            <button onclick="loadCams()" style="background:var(--sun-gold);color:var(--ocean-deep);border:none;border-radius:8px;padding:8px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">Load</button>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:11px;opacity:0.4;display:block;margin-bottom:4px;">Cam 2 — Vilano Boat Ramp / River</label>
+          <div style="display:flex;gap:6px;">
+            <input type="text" id="ytId2" placeholder="YouTube Video ID" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--foam);padding:8px 10px;border-radius:8px;font-family:'Space Mono',monospace;font-size:12px;outline:none;">
+            <button onclick="loadCams()" style="background:var(--sun-gold);color:var(--ocean-deep);border:none;border-radius:8px;padding:8px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">Load</button>
+          </div>
         </div>
       </div>
-      <div class="webcam-card">
-        <iframe src="https://www.skylinewebcams.com/en/webcam/united-states/florida/st-augustine/bridge-of-lions.html" 
-          loading="lazy" allowfullscreen allow="autoplay"></iframe>
-        <div class="webcam-label">
-          <div class="live-dot"></div>
-          Bridge of Lions & Matanzas Bay — 24/7 Live
-        </div>
-      </div>
     </div>
-    <div style="margin-top:12px; opacity:0.35; font-size:12px; text-align:center;">
-      Webcams courtesy of SkylineWebcams & St. Augustine LIVE (Meerkat Media Group).
-      Views show the Matanzas River / Intracoastal Waterway near the St. Johns River mouth.
+    <div class="webcam-grid" id="webcamGrid"></div>
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+      <a href="https://www.stauglive.com/" target="_blank" class="cam-link">🔗 StAugLive.com</a>
+      <a href="https://www.skylinewebcams.com/en/webcam/united-states/florida/st-augustine/matanzas-river.html" target="_blank" class="cam-link">🔗 Matanzas River</a>
+      <a href="https://www.skylinewebcams.com/en/webcam/united-states/florida/st-augustine/bridge-of-lions.html" target="_blank" class="cam-link">🔗 Bridge of Lions</a>
+      <a href="https://www.livebeaches.com/webcams/vilano-boat-ramp-live-webcam-in-st-augustine/" target="_blank" class="cam-link">🔗 Vilano Boat Ramp</a>
     </div>
+    <div style="margin-top:12px;opacity:0.35;font-size:12px;text-align:center;">Paste YouTube stream IDs from <a href="https://www.stauglive.com/" target="_blank" style="color:var(--spray);">StAugLive.com</a> — IDs rotate periodically.</div>
   </div>
-
-  <footer>
-    Conditions are estimates — always check official NOAA and NWS forecasts before heading out.
-    <br>Built for St. Johns River / ICW / St. Augustine Inlet riders.
-  </footer>
-
+  <footer>Data from NOAA CO-OPS, NDBC, NWS & Open-Meteo. Auto-refreshes every 5 min.<br>Always check official NOAA marine forecasts before heading out.</footer>
 </div>
-
 <script>
-// Toggle buttons
-function toggleSelect(btn) {
-  const group = btn.dataset.group;
-  document.querySelectorAll(`.toggle-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  update();
+const NOAA_STATION='8720218',TIDE_STATION='8720576',LAT=29.89,LON=-81.31;
+let D={waterTemp:null,airTemp:null,windSpeed:null,windGust:null,windDir:null,waveHeight:null,visibility:null,precipCode:null,precipRate:null,tidePhase:null,tideLevel:null,currentStrength:null,uvIndex:null,cloudCover:null,isDay:true,thunderstorm:false,precipCategory:'none'};
+let S={noaa:'loading',weather:'loading',waves:'loading',tides:'loading'};
+
+async function fetchNOAA(){
+  S.noaa='loading';uS();
+  try{
+    const b='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter',p=`date=latest&station=${NOAA_STATION}&time_zone=lst_ldt&units=english&format=json&application=JetSkiApp`;
+    const[w,wi,a]=await Promise.all([
+      fetch(`${b}?${p}&product=water_temperature`).then(r=>r.json()),
+      fetch(`${b}?${p}&product=wind`).then(r=>r.json()),
+      fetch(`${b}?${p}&product=air_temperature`).then(r=>r.json())
+    ]);
+    if(w.data?.length)D.waterTemp=+w.data[0].v;
+    if(wi.data?.length){D.windSpeed=+wi.data[0].s;D.windGust=+wi.data[0].g;D.windDir=+wi.data[0].d;}
+    if(a.data?.length)D.airTemp=+a.data[0].v;
+    S.noaa='live';
+  }catch(e){console.error('NOAA:',e);S.noaa='error';}
+  uS();
 }
 
-function getToggleVal(group) {
-  const active = document.querySelector(`.toggle-btn[data-group="${group}"].active`);
-  return active ? active.dataset.val : '';
+async function fetchTides(){
+  S.tides='loading';uS();
+  try{
+    const b='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
+    const now=new Date(),pad=n=>String(n).padStart(2,'0');
+    const bd=`${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}`;
+    const tm=new Date(now.getTime()+864e5);
+    const ed=`${tm.getFullYear()}${pad(tm.getMonth()+1)}${pad(tm.getDate())}`;
+    const[pr,lv]=await Promise.all([
+      fetch(`${b}?begin_date=${bd}&end_date=${ed}&station=${TIDE_STATION}&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&format=json&application=JetSkiApp`).then(r=>r.json()),
+      fetch(`${b}?date=latest&station=${TIDE_STATION}&product=water_level&datum=MLLW&time_zone=lst_ldt&units=english&format=json&application=JetSkiApp`).then(r=>r.json())
+    ]);
+    if(lv.data?.length)D.tideLevel=+lv.data[0].v;
+    if(pr.predictions?.length>=2){
+      const nMs=now.getTime();let prev=null,next=null;
+      for(const p of pr.predictions){const t=new Date(p.t).getTime();if(t<=nMs)prev=p;else if(!next)next=p;}
+      if(prev&&next){
+        if(prev.type==='L'&&next.type==='H')D.tidePhase='incoming';
+        else if(prev.type==='H'&&next.type==='L')D.tidePhase='outgoing';
+        else D.tidePhase=prev.type==='H'?'high':'low';
+        const prog=(nMs-new Date(prev.t).getTime())/(new Date(next.t).getTime()-new Date(prev.t).getTime());
+        const mid=1-Math.abs(prog-0.5)*2,rng=Math.abs(+next.v - +prev.v);
+        D.currentStrength=(rng>4&&mid>0.3)?'strong':(rng>2||mid>0.3)?'mild':'calm';
+      }
+    }
+    S.tides='live';
+  }catch(e){console.error('Tides:',e);S.tides='error';}
+  uS();
 }
 
-// Scoring functions
-function scoreWaterTemp(t) {
-  // Ideal 72-85°F, rideable 60-90
-  if (t >= 72 && t <= 85) return 100;
-  if (t >= 65 && t < 72) return 60 + (t - 65) / 7 * 40;
-  if (t > 85 && t <= 92) return 100 - (t - 85) / 7 * 25;
-  if (t >= 55 && t < 65) return 20 + (t - 55) / 10 * 40;
-  if (t > 92) return Math.max(0, 75 - (t - 92) * 10);
-  if (t < 55) return Math.max(0, (t - 45) / 10 * 20);
-  return 0;
+async function fetchWeather(){
+  S.weather='loading';uS();
+  try{
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day,uv_index&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`);
+    const d=(await r.json()).current;
+    if(D.airTemp===null)D.airTemp=d.temperature_2m;
+    if(D.windSpeed===null)D.windSpeed=d.wind_speed_10m;
+    if(D.windGust===null)D.windGust=d.wind_gusts_10m;
+    if(D.windDir===null)D.windDir=d.wind_direction_10m;
+    D.precipRate=d.precipitation;D.cloudCover=d.cloud_cover;D.uvIndex=d.uv_index;D.isDay=d.is_day===1;
+    const c=d.weather_code;D.precipCode=c;D.thunderstorm=c>=95;
+    D.visibility=(c>=40&&c<=49)?'foggy':(c>=50&&c<=59||D.cloudCover>85)?'hazy':'clear';
+    D.precipCategory=c>=95?'storm':c>=63?'heavy':c>=51?'light':'none';
+    S.weather='live';
+  }catch(e){console.error('Weather:',e);S.weather='error';}
+  uS();
 }
 
-function scoreWind(w) {
-  if (w <= 5) return 100;
-  if (w <= 10) return 100 - (w - 5) / 5 * 15;
-  if (w <= 15) return 85 - (w - 10) / 5 * 25;
-  if (w <= 20) return 60 - (w - 15) / 5 * 25;
-  if (w <= 25) return 35 - (w - 20) / 5 * 20;
-  if (w <= 30) return 15 - (w - 25) / 5 * 10;
-  return Math.max(0, 5 - (w - 30) / 10 * 5);
-}
-
-function scoreWaves(h) {
-  // h in tenths of a foot
-  const ft = h / 10;
-  if (ft <= 0.5) return 100;
-  if (ft <= 1.0) return 95 - (ft - 0.5) / 0.5 * 10;
-  if (ft <= 2.0) return 85 - (ft - 1.0) * 30;
-  if (ft <= 3.0) return 55 - (ft - 2.0) * 35;
-  if (ft <= 4.0) return 20 - (ft - 3.0) * 15;
-  return Math.max(0, 5 - (ft - 4.0) * 5);
-}
-
-function scoreAirTemp(t) {
-  if (t >= 75 && t <= 92) return 100;
-  if (t >= 65 && t < 75) return 65 + (t - 65) / 10 * 35;
-  if (t > 92 && t <= 100) return 100 - (t - 92) / 8 * 20;
-  if (t > 100) return Math.max(20, 80 - (t - 100) * 8);
-  if (t >= 55 && t < 65) return 30 + (t - 55) / 10 * 35;
-  if (t < 55) return Math.max(0, (t - 35) / 20 * 30);
-  return 0;
-}
-
-function scoreVisibility(v) {
-  return { clear: 100, hazy: 65, foggy: 20 }[v] || 50;
-}
-
-function scorePrecip(p) {
-  return { none: 100, light: 60, heavy: 20, storm: 0 }[p] || 50;
-}
-
-function scoreTide(t) {
-  // High tide = best depth, incoming/outgoing = decent, low = worst (shallow spots, sandbars)
-  return { high: 100, incoming: 85, outgoing: 70, low: 50 }[t] || 75;
-}
-
-function scoreTime(t) {
-  return { earlyam: 80, morning: 100, midday: 85, evening: 70 }[t] || 80;
-}
-
-function scoreTraffic(t) {
-  return { light: 100, moderate: 70, heavy: 35 }[t] || 70;
-}
-
-function scoreCurrent(c) {
-  return { calm: 100, mild: 80, strong: 40 }[c] || 70;
-}
-
-// Weights
-const weights = {
-  wind: 0.22,
-  waves: 0.15,
-  precip: 0.18,
-  waterTemp: 0.10,
-  airTemp: 0.07,
-  visibility: 0.08,
-  tide: 0.06,
-  current: 0.06,
-  traffic: 0.04,
-  timeofday: 0.04
-};
-
-function getColor(score) {
-  if (score >= 80) return '#2ecc71';
-  if (score >= 60) return '#a8d83e';
-  if (score >= 40) return '#f5b731';
-  if (score >= 20) return '#ff8a3d';
-  return '#e74c3c';
-}
-
-function getVerdict(score) {
-  if (score >= 85) return { text: '🟢 Send It!', color: '#2ecc71' };
-  if (score >= 70) return { text: '🟢 Good to Go', color: '#6bde71' };
-  if (score >= 55) return { text: '🟡 Rideable', color: '#f5b731' };
-  if (score >= 40) return { text: '🟠 Marginal', color: '#ff8a3d' };
-  if (score >= 20) return { text: '🔴 Risky', color: '#e74c3c' };
-  return { text: '⛔ Stay Docked', color: '#c0392b' };
-}
-
-function getTips(factors, overallScore) {
-  const tips = [];
-  const wind = parseInt(document.getElementById('windSpeed').value);
-  const waterTemp = parseInt(document.getElementById('waterTemp').value);
-  const airTemp = parseInt(document.getElementById('airTemp').value);
-  const precip = getToggleVal('precip');
-  const vis = getToggleVal('visibility');
-  const tide = getToggleVal('tide');
-  const current = getToggleVal('current');
-  const traffic = getToggleVal('traffic');
-  const waveH = parseInt(document.getElementById('waveHeight').value) / 10;
-
-  if (precip === 'storm') tips.push('⚠️ Lightning is the #1 killer on the water in FL — do NOT go out in thunderstorms.');
-  if (wind > 20) tips.push('Winds above 20 mph create dangerous chop on the river. Consider sheltered creeks if you must ride.');
-  if (wind > 10 && wind <= 20) tips.push('Moderate wind — expect whitecaps on open stretches. Ride with the wind when possible.');
-  if (waterTemp < 65) tips.push('Cold water risk — wear a wetsuit. Hypothermia is possible if you fall in below 65°F.');
-  if (waterTemp < 55) tips.push('Dangerously cold water — a dry suit or postponement is strongly recommended.');
-  if (airTemp > 95) tips.push('Extreme heat — hydrate constantly, wear sun protection. Heat exhaustion risk is elevated.');
-  if (airTemp < 60) tips.push('Cold air combined with spray makes windchill brutal on a jet ski. Layer up.');
-  if (vis === 'foggy') tips.push('Reduced visibility means other boats can\'t see you. Use navigation lights and stay near shore.');
-  if (tide === 'low') tips.push('Low tide exposes sandbars and oyster beds in the St. Johns — watch your depth near shorelines and creeks.');
-  if (tide === 'outgoing' && current === 'strong') tips.push('Strong outgoing tide near the inlet can push you toward the ocean. Stay upriver if inexperienced.');
-  if (current === 'strong') tips.push('Strong currents increase fuel consumption and make it harder to return to your launch point.');
-  if (traffic === 'heavy') tips.push('Heavy boat traffic — stay alert for wakes, especially from large vessels in the ICW.');
-  if (waveH >= 2) tips.push('Significant chop — reduce speed and keep weight back to prevent bow-stuffing.');
-  if (overallScore >= 80) tips.push('Excellent conditions! Perfect day for a long ride up the ICW or into the creeks.');
-  if (overallScore >= 60 && overallScore < 80) tips.push('Decent riding day — monitor conditions and be prepared to head back if things change.');
-  if (precip === 'light') tips.push('Light rain reduces visibility for you and other boaters. Use eye protection.');
-  if (tips.length === 0) tips.push('Check NOAA marine forecast for latest updates before launching.');
-
-  return tips;
-}
-
-function update() {
-  const waterTemp = parseInt(document.getElementById('waterTemp').value);
-  const wind = parseInt(document.getElementById('windSpeed').value);
-  const waveH = parseInt(document.getElementById('waveHeight').value);
-  const airTemp = parseInt(document.getElementById('airTemp').value);
-  const vis = getToggleVal('visibility');
-  const precip = getToggleVal('precip');
-  const tide = getToggleVal('tide');
-  const tod = getToggleVal('timeofday');
-  const traffic = getToggleVal('traffic');
-  const current = getToggleVal('current');
-
-  // Update display values
-  document.getElementById('waterTempVal').textContent = waterTemp;
-  document.getElementById('windVal').textContent = wind;
-  document.getElementById('waveVal').textContent = (waveH / 10).toFixed(1);
-  document.getElementById('airTempVal').textContent = airTemp;
-
-  // Calculate factor scores
-  const factors = {
-    wind: { score: scoreWind(wind), label: 'Wind', weight: weights.wind },
-    waves: { score: scoreWaves(waveH), label: 'Waves', weight: weights.waves },
-    precip: { score: scorePrecip(precip), label: 'Precipitation', weight: weights.precip },
-    waterTemp: { score: scoreWaterTemp(waterTemp), label: 'Water Temp', weight: weights.waterTemp },
-    airTemp: { score: scoreAirTemp(airTemp), label: 'Air Temp', weight: weights.airTemp },
-    visibility: { score: scoreVisibility(vis), label: 'Visibility', weight: weights.visibility },
-    tide: { score: scoreTide(tide), label: 'Tide', weight: weights.tide },
-    current: { score: scoreCurrent(current), label: 'Current', weight: weights.current },
-    traffic: { score: scoreTraffic(traffic), label: 'Traffic', weight: weights.traffic },
-    timeofday: { score: scoreTime(tod), label: 'Time of Day', weight: weights.timeofday }
-  };
-
-  // Weighted average
-  let totalWeight = 0;
-  let weightedSum = 0;
-  for (const key in factors) {
-    weightedSum += factors[key].score * factors[key].weight;
-    totalWeight += factors[key].weight;
+async function fetchWaves(){
+  S.waves='loading';uS();
+  try{
+    const r=await fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&current=wave_height,wave_period&length_unit=imperial`);
+    const d=await r.json();if(d.current)D.waveHeight=d.current.wave_height||0;
+    S.waves='live';
+  }catch(e){
+    console.error('Waves:',e);S.waves='error';
+    if(D.windSpeed!=null){D.waveHeight=D.windSpeed<8?0.5:D.windSpeed<15?1.5:D.windSpeed<25?3:5;}
   }
-
-  // Storm override
-  let overall = Math.round(weightedSum / totalWeight);
-  if (precip === 'storm') overall = Math.min(overall, 10);
-  if (vis === 'foggy' && wind > 15) overall = Math.min(overall, 25);
-
-  // Update score display
-  const scoreEl = document.getElementById('scoreNumber');
-  const ringEl = document.getElementById('scoreRing');
-  const badgeEl = document.getElementById('verdictBadge');
-  const circumference = 2 * Math.PI * 80; // 502
-
-  scoreEl.textContent = overall;
-  scoreEl.style.color = getColor(overall);
-
-  const offset = circumference - (overall / 100) * circumference;
-  ringEl.style.strokeDashoffset = offset;
-  ringEl.style.stroke = getColor(overall);
-
-  const verdict = getVerdict(overall);
-  badgeEl.textContent = verdict.text;
-  badgeEl.style.borderColor = verdict.color;
-  badgeEl.style.color = verdict.color;
-  badgeEl.style.background = verdict.color + '10';
-
-  // Breakdown
-  const grid = document.getElementById('breakdownGrid');
-  grid.innerHTML = '';
-  // Sort by weight descending
-  const sorted = Object.values(factors).sort((a, b) => b.weight - a.weight);
-  sorted.forEach(f => {
-    const pct = Math.round(f.weight * 100);
-    const color = getColor(f.score);
-    grid.innerHTML += `
-      <div class="factor-bar">
-        <div class="factor-bar-fill" style="width:${f.score}%;background:${color}"></div>
-        <div class="factor-name">${f.label} (${pct}% weight)</div>
-        <div class="factor-score" style="color:${color}">${Math.round(f.score)}</div>
-        <div class="factor-note">${f.score >= 80 ? 'Good' : f.score >= 60 ? 'Okay' : f.score >= 40 ? 'Caution' : f.score >= 20 ? 'Poor' : 'Dangerous'}</div>
-      </div>`;
-  });
-
-  // Tips
-  const tips = getTips(factors, overall);
-  const tipList = document.getElementById('tipList');
-  tipList.innerHTML = tips.map(t => `<li>${t}</li>`).join('');
+  uS();
 }
 
-// Init
-update();
+async function fetchAllData(){
+  const btn=document.getElementById('refreshBtn');btn.disabled=true;btn.textContent='↻ Loading...';
+  await Promise.all([fetchNOAA(),fetchTides(),fetchWeather(),fetchWaves()]);
+  btn.disabled=false;btn.textContent='↻ Refresh';
+  renderAll();
+}
+
+function uS(){
+  const v=Object.values(S),pill=document.getElementById('statusPill'),dot=document.getElementById('statusDot'),txt=document.getElementById('statusText');
+  if(v.every(s=>s==='live')){pill.className='status-pill live';dot.className='pulse';txt.textContent='All data live';}
+  else if(v.some(s=>s==='error')){pill.className='status-pill error';dot.className='pulse red';txt.textContent=`${v.filter(s=>s==='live').length}/${v.length} sources live`;}
+  else{pill.className='status-pill loading';dot.className='pulse yellow';txt.textContent='Fetching live data...';}
+}
+
+// Scoring
+function sWT(t){if(t==null)return 70;if(t>=72&&t<=85)return 100;if(t>=65&&t<72)return 60+(t-65)/7*40;if(t>85&&t<=92)return 100-(t-85)/7*25;if(t>=55&&t<65)return 20+(t-55)/10*40;if(t>92)return Math.max(0,75-(t-92)*10);return t<55?Math.max(0,(t-45)/10*20):0;}
+function sW(w){if(w==null)return 70;if(w<=5)return 100;if(w<=10)return 100-(w-5)/5*15;if(w<=15)return 85-(w-10)/5*25;if(w<=20)return 60-(w-15)/5*25;if(w<=25)return 35-(w-20)/5*20;if(w<=30)return 15-(w-25)/5*10;return Math.max(0,5-(w-30)/10*5);}
+function sWv(h){if(h==null)return 70;if(h<=0.5)return 100;if(h<=1)return 95-(h-0.5)/0.5*10;if(h<=2)return 85-(h-1)*30;if(h<=3)return 55-(h-2)*35;if(h<=4)return 20-(h-3)*15;return Math.max(0,5-(h-4)*5);}
+function sAT(t){if(t==null)return 70;if(t>=75&&t<=92)return 100;if(t>=65&&t<75)return 65+(t-65)/10*35;if(t>92&&t<=100)return 100-(t-92)/8*20;if(t>100)return Math.max(20,80-(t-100)*8);if(t>=55&&t<65)return 30+(t-55)/10*35;return t<55?Math.max(0,(t-35)/20*30):0;}
+function sV(v){return{clear:100,hazy:65,foggy:20}[v]||70;}
+function sP(p){return{none:100,light:60,heavy:20,storm:0}[p]||70;}
+function sTi(t){return{high:100,incoming:85,outgoing:70,low:50}[t]||75;}
+function sC(c){return{calm:100,mild:80,strong:40}[c]||70;}
+function sToD(){const h=new Date().getHours();if(h>=7&&h<11)return 100;if(h>=11&&h<16)return 85;if(h>=16&&h<19)return 75;if(h>=6&&h<7)return 80;return 40;}
+function sTr(){const d=new Date().getDay(),h=new Date().getHours(),we=d===0||d===6;if(we&&h>=10&&h<16)return 35;if(we)return 60;if(h>=10&&h<14)return 70;return 100;}
+const W={wind:0.22,waves:0.15,precip:0.18,waterTemp:0.10,airTemp:0.07,visibility:0.08,tide:0.06,current:0.06,traffic:0.04,timeofday:0.04};
+function gC(s){if(s>=80)return'#2ecc71';if(s>=60)return'#a8d83e';if(s>=40)return'#f5b731';if(s>=20)return'#ff8a3d';return'#e74c3c';}
+function gV(s){if(s>=85)return{t:'🟢 Send It!',c:'#2ecc71'};if(s>=70)return{t:'🟢 Good to Go',c:'#6bde71'};if(s>=55)return{t:'🟡 Rideable',c:'#f5b731'};if(s>=40)return{t:'🟠 Marginal',c:'#ff8a3d'};if(s>=20)return{t:'🔴 Risky',c:'#e74c3c'};return{t:'⛔ Stay Docked',c:'#c0392b'};}
+function wdl(d){if(d==null)return'';const a=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];return a[Math.round(d/22.5)%16];}
+function gtl(){const h=new Date().getHours();if(h>=6&&h<7)return'Dawn';if(h>=7&&h<11)return'Morning';if(h>=11&&h<16)return'Midday';if(h>=16&&h<19)return'Evening';return'Night';}
+function gtr(){const s=sTr();return s>=80?'Light':s>=50?'Moderate':'Heavy';}
+function wmo(c){if(c==null)return'Unknown';if(c===0)return'Clear sky';if(c<=3)return'Partly cloudy';if(c>=45&&c<=48)return'Foggy';if(c>=51&&c<=55)return'Drizzle';if(c>=61&&c<=65)return'Rain';if(c>=80&&c<=82)return'Rain showers';if(c>=95)return'Thunderstorm';return'Overcast';}
+const fm=(v,d=0)=>v!=null?v.toFixed(d):'--';
+
+function renderAll(){
+  const d=D,g=document.getElementById('dataGrid');
+  const cards=[
+    {i:'🌡️',t:'Water Temp',s:`NOAA #${NOAA_STATION} (Mayport)`,v:fm(d.waterTemp,1),u:'°F',dt:d.waterTemp!=null?(d.waterTemp>=72?'Comfortable':d.waterTemp>=60?'Cool — consider wetsuit':'Cold — wetsuit required'):'',sc:sWT(d.waterTemp)},
+    {i:'🌬️',t:'Wind',s:'NOAA / Open-Meteo',v:fm(d.windSpeed,1),u:'mph',dt:`Gust: ${fm(d.windGust,1)} mph ${d.windDir!=null?'• From '+wdl(d.windDir):''}`,sc:sW(d.windSpeed)},
+    {i:'🌊',t:'Wave Height',s:'Open-Meteo Marine',v:fm(d.waveHeight,1),u:'ft',dt:d.waveHeight!=null?(d.waveHeight<1?'Calm':d.waveHeight<2?'Light chop':d.waveHeight<3?'Moderate chop':'Rough'):'',sc:sWv(d.waveHeight)},
+    {i:'🌤️',t:'Air Temp',s:'NOAA / Open-Meteo',v:fm(d.airTemp,1),u:'°F',dt:`Cloud: ${d.cloudCover!=null?d.cloudCover+'%':'--'} • UV: ${d.uvIndex!=null?d.uvIndex.toFixed(0):'--'}`,sc:sAT(d.airTemp)},
+    {i:'🌧️',t:'Weather',s:wmo(d.precipCode),v:d.precipCategory?d.precipCategory[0].toUpperCase()+d.precipCategory.slice(1):'--',u:'',dt:d.thunderstorm?'⚡ THUNDERSTORM WARNING':`Rain: ${fm(d.precipRate,2)} in/hr`,sc:sP(d.precipCategory)},
+    {i:'🔆',t:'Visibility',s:'Derived from conditions',v:d.visibility?d.visibility[0].toUpperCase()+d.visibility.slice(1):'--',u:'',dt:d.isDay?'☀️ Daytime':'🌙 Nighttime',sc:sV(d.visibility)},
+    {i:'🌊',t:'Tide Phase',s:`NOAA #${TIDE_STATION} (St Aug)`,v:d.tidePhase?d.tidePhase[0].toUpperCase()+d.tidePhase.slice(1):'--',u:'',dt:d.tideLevel!=null?`Level: ${d.tideLevel.toFixed(2)} ft MLLW`:'',sc:sTi(d.tidePhase)},
+    {i:'⚡',t:'Current',s:'Estimated from tides',v:d.currentStrength?d.currentStrength[0].toUpperCase()+d.currentStrength.slice(1):'--',u:'',dt:d.tidePhase==='outgoing'?'⚠️ Outgoing near inlet':'',sc:sC(d.currentStrength)},
+    {i:'⏰',t:'Time of Day',s:gtl(),v:gtl(),u:'',dt:new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),sc:sToD()},
+    {i:'🚤',t:'River Traffic',s:'Est. from day/time',v:gtr(),u:'',dt:new Date().toLocaleDateString('en-US',{weekday:'long'}),sc:sTr()}
+  ];
+  g.innerHTML=cards.map(c=>`<div class="data-card"><div class="dc-header"><div class="dc-icon">${c.i}</div><div><div class="dc-title">${c.t}</div><div class="dc-sub">${c.s}</div></div></div><div class="dc-value" style="color:${gC(c.sc)}">${c.v}<span class="unit"> ${c.u}</span></div><div class="dc-detail">${c.dt}</div><div class="dc-score-bar"><div class="dc-score-fill" style="width:${c.sc}%;background:${gC(c.sc)}"></div></div></div>`).join('');
+
+  const F={wind:{score:sW(d.windSpeed),label:'Wind',weight:W.wind},waves:{score:sWv(d.waveHeight),label:'Waves',weight:W.waves},precip:{score:sP(d.precipCategory),label:'Precipitation',weight:W.precip},waterTemp:{score:sWT(d.waterTemp),label:'Water Temp',weight:W.waterTemp},airTemp:{score:sAT(d.airTemp),label:'Air Temp',weight:W.airTemp},visibility:{score:sV(d.visibility),label:'Visibility',weight:W.visibility},tide:{score:sTi(d.tidePhase),label:'Tide',weight:W.tide},current:{score:sC(d.currentStrength),label:'Current',weight:W.current},traffic:{score:sTr(),label:'Traffic',weight:W.traffic},timeofday:{score:sToD(),label:'Time of Day',weight:W.timeofday}};
+  let ws=0,wt=0;for(const k in F){ws+=F[k].score*F[k].weight;wt+=F[k].weight;}
+  let ov=Math.round(ws/wt);
+  if(d.thunderstorm)ov=Math.min(ov,10);
+  if(d.visibility==='foggy'&&d.windSpeed>15)ov=Math.min(ov,25);
+  if(!d.isDay)ov=Math.min(ov,35);
+
+  document.getElementById('scoreNumber').textContent=ov;
+  document.getElementById('scoreNumber').style.color=gC(ov);
+  const ring=document.getElementById('scoreRing');
+  ring.style.strokeDashoffset=502-(ov/100)*502;ring.style.stroke=gC(ov);
+  const vd=gV(ov),badge=document.getElementById('verdictBadge');
+  badge.textContent=vd.t;badge.style.borderColor=vd.c;badge.style.color=vd.c;badge.style.background=vd.c+'10';
+
+  const bg=document.getElementById('breakdownGrid');
+  bg.innerHTML=Object.values(F).sort((a,b)=>b.weight-a.weight).map(f=>{const p=Math.round(f.weight*100),cl=gC(f.score);return`<div class="factor-bar"><div class="factor-bar-fill" style="width:${f.score}%;background:${cl}"></div><div class="factor-name">${f.label} (${p}%)</div><div class="factor-score" style="color:${cl}">${Math.round(f.score)}</div><div class="factor-note">${f.score>=80?'Good':f.score>=60?'Okay':f.score>=40?'Caution':f.score>=20?'Poor':'Dangerous'}</div></div>`;}).join('');
+
+  const tips=[];
+  if(d.thunderstorm)tips.push('⚠️ Lightning is the #1 killer on FL water — do NOT go out in thunderstorms.');
+  if(d.windSpeed>20)tips.push('Winds above 20 mph create dangerous chop. Consider sheltered creeks.');
+  else if(d.windSpeed>10)tips.push('Moderate wind — expect whitecaps on open stretches.');
+  if(d.waterTemp!=null&&d.waterTemp<65)tips.push('Cold water — wear a wetsuit. Hypothermia risk below 65°F.');
+  if(d.airTemp!=null&&d.airTemp>95)tips.push('Extreme heat — hydrate constantly, wear sun protection.');
+  if(d.airTemp!=null&&d.airTemp<60)tips.push('Cold air + spray = brutal windchill on a jet ski. Layer up.');
+  if(d.visibility==='foggy')tips.push('Reduced visibility — use nav lights and stay near shore.');
+  if(d.tidePhase==='low')tips.push('Low tide exposes sandbars and oyster beds — watch depth near shorelines.');
+  if(d.tidePhase==='outgoing'&&d.currentStrength==='strong')tips.push('Strong outgoing tide near the inlet — stay upriver if inexperienced.');
+  if(d.waveHeight!=null&&d.waveHeight>=2)tips.push('Significant chop — reduce speed, keep weight back.');
+  if(!d.isDay)tips.push('🌙 Nighttime riding requires navigation lights and extreme caution.');
+  if(d.uvIndex!=null&&d.uvIndex>=8)tips.push(`UV index is ${d.uvIndex.toFixed(0)} — wear reef-safe sunscreen.`);
+  if(ov>=80)tips.push('Excellent conditions! Great day for a long ride on the ICW.');
+  else if(ov>=55)tips.push('Decent day — monitor conditions and be ready to head back.');
+  if(!tips.length)tips.push('Check NOAA marine forecast before launching.');
+  document.getElementById('tipList').innerHTML=tips.map(t=>`<li>${t}</li>`).join('');
+  document.getElementById('lastUpdate').textContent=`Updated: ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`;
+}
+
+function loadCams(){
+  const i1=document.getElementById('ytId1').value.trim(),i2=document.getElementById('ytId2').value.trim(),g=document.getElementById('webcamGrid');
+  const cams=[{id:i1,l:'Bridge of Lions / Matanzas Bay',n:1},{id:i2,l:'Vilano Boat Ramp / River View',n:2}];
+  g.innerHTML=cams.map(c=>c.id&&c.id.length>=5?`<div class="webcam-card"><iframe src="https://www.youtube.com/embed/${c.id}?autoplay=1&mute=1" loading="lazy" allowfullscreen allow="autoplay; encrypted-media"></iframe><div class="webcam-label"><div class="live-dot"></div>${c.l} — YouTube Live</div></div>`:`<div class="webcam-card"><div class="webcam-placeholder"><div class="ph-icon">📹</div><div>Cam ${c.n}: Paste YouTube ID above</div><div style="font-size:11px;opacity:0.5">Find at StAugLive.com</div></div><div class="webcam-label"><div class="live-dot" style="background:rgba(255,255,255,0.2);animation:none"></div>${c.l}</div></div>`).join('');
+  if(i1||i2)window.location.hash=`cam1=${i1}&cam2=${i2}`;
+}
+function loadHash(){const h=window.location.hash.slice(1);if(h){const p=new URLSearchParams(h);if(p.get('cam1'))document.getElementById('ytId1').value=p.get('cam1');if(p.get('cam2'))document.getElementById('ytId2').value=p.get('cam2');}}
+
+loadHash();loadCams();fetchAllData();
+setInterval(fetchAllData,5*60*1000);
 </script>
 </body>
 </html>
